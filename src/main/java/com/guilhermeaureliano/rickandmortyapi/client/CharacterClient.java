@@ -49,13 +49,12 @@ public class CharacterClient {
                 .bodyToFlux(CharacterListResponse.class);
     }
 
-    public Flux<CharacterResponse> getCharactersByIds(String[] ids) {
+    public Flux<CharacterResponse> getCharactersByIds(String ids) {
         log.info("Buscando os personagens pelos IDs [{}]", ids);
 
-        String idsAsString = String.join(",", ids);
         return webClient
                 .get()
-                .uri("/character/" + idsAsString)
+                .uri("/character/" + ids)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .onStatus(HttpStatus::is4xxClientError,

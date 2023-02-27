@@ -27,8 +27,7 @@ public class CharacterController {
 
     @RequestMapping(value = "/characters/{ids}", method = RequestMethod.GET)
     public Flux<CharacterResponse> getMultipleCharacters(@PathVariable String ids) {
-        String[] idArray = ids.split(",");
-        return this.rickAndMortyClient.getCharactersByIds(idArray);
+        return this.rickAndMortyClient.getCharactersByIds(ids);
     }
 
-}
+}.
