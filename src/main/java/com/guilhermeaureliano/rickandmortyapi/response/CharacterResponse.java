@@ -1,0 +1,19 @@
+package com.guilhermeaureliano.rickandmortyapi.response;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.Setter;
+
+import java.util.List;
+
+
+@JsonAutoDetect(fieldVisibility =  JsonAutoDetect.Visibility.ANY)
+public class CharacterResponse {
+
+    private String id;
+    private String name;
+    private String status;
+    private String species;
+    private String gender;
+    private String image;
+    private List<String> episode;
+}
