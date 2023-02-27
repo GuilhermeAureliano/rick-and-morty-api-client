@@ -1,12 +1,11 @@
 package com.guilhermeaureliano.rickandmortyapi.controller;
 
 import com.guilhermeaureliano.rickandmortyapi.client.RickAndMortyClient;
+import com.guilhermeaureliano.rickandmortyapi.response.CharacterListResponse;
 import com.guilhermeaureliano.rickandmortyapi.response.CharacterResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -20,4 +19,10 @@ public class RickAndMortyController {
     public Mono<CharacterResponse> getCharacterById(@PathVariable String id) {
         return this.rickAndMortyClient.getCharacterById(id);
     }
+
+    @RequestMapping(value = "/character", method = RequestMethod.GET)
+    public Flux<CharacterListResponse> getAllCharacters(@RequestParam(name = "page", defaultValue = "1") int page) {
+        return this.rickAndMortyClient.getAllCharacters(page);
+    }
+
 }
