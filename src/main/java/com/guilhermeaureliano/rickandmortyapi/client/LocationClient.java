@@ -1,11 +1,13 @@
 package com.guilhermeaureliano.rickandmortyapi.client;
 
+import com.guilhermeaureliano.rickandmortyapi.response.LocationListResponse;
 import com.guilhermeaureliano.rickandmortyapi.response.LocationResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -28,6 +30,22 @@ public class LocationClient {
                 .onStatus(HttpStatus::is4xxClientError,
                         error -> Mono.error(new RuntimeException("Verifique o ID informado!")))
                 .bodyToMono(LocationResponse.class);
+    }
+
+    public Flux<LocationListResponse> getAllLocation(int page) {
+        log.info("Buscando todos os locais da página [{}]", page);
+
+        return webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/location")
+                        .queryParam("page", page)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        error -> Mono.error(new RuntimeException("Erro ao buscar locais!")))
+                .bodyToFlux(LocationListResponse.class);
     }
 
 }
