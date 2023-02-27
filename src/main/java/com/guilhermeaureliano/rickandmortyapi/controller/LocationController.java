@@ -24,4 +24,9 @@ public class LocationController {
     public Flux<LocationListResponse> getAllLocation(@RequestParam(name = "page", defaultValue = "1") int page) {
         return this.locationClient.getAllLocation(page);
     }
+
+    @RequestMapping(value = "locations/{ids}", method = RequestMethod.GET)
+    public Flux<LocationResponse> getMultiplesLocations(@PathVariable String ids) {
+        return this.locationClient.getLocationsById(ids);
+    }
 }

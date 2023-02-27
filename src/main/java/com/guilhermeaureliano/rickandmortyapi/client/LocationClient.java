@@ -48,4 +48,17 @@ public class LocationClient {
                 .bodyToFlux(LocationListResponse.class);
     }
 
+    public Flux<LocationResponse> getLocationsById(String ids) {
+        log.info("Buscando os locais com os IDs [{}]", ids);
+
+        return webClient
+                .get()
+                .uri("/location/" + ids)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        error -> Mono.error(new RuntimeException("Verifique o ID informado!")))
+                .bodyToFlux(LocationResponse.class);
+    }
+
 }
