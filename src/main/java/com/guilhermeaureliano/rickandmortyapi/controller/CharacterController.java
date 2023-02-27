@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/webclient")
-public class RickAndMortyController {
+public class CharacterController {
 
     private RickAndMortyClient rickAndMortyClient;
 
