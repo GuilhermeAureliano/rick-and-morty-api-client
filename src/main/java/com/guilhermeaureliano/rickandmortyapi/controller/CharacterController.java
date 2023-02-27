@@ -30,4 +30,4 @@ public class CharacterController {
         return this.rickAndMortyClient.getCharactersByIds(ids);
     }
 
-}.
+}
