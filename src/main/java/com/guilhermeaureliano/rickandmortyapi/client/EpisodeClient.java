@@ -48,4 +48,17 @@ public class EpisodeClient {
                         error -> Mono.error(new RuntimeException("Erro ao buscar episódios!")))
                 .bodyToFlux(EpisodeListResponse.class);
     }
+
+    public Flux<EpisodeResponse> getEpisodesById(String ids) {
+        log.info("Buscando os episódios pelos IDs [{}]", ids);
+
+        return webClient
+                .get()
+                .uri("/episode/" + ids)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        error -> Mono.error(new RuntimeException("Verifique o ID informado!")))
+                .bodyToFlux(EpisodeResponse.class);
+    }
 }

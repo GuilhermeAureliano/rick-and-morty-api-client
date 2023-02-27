@@ -24,4 +24,9 @@ public class EpisodeController {
     public Flux<EpisodeListResponse> getAllEpisodes(@RequestParam(name = "page", defaultValue = "1") int page) {
         return this.episodeClient.getAllEpisodes(page);
     }
+
+    @RequestMapping(value = "/episodes/{ids}", method = RequestMethod.GET)
+    public Flux<EpisodeResponse> getMultipleEpisodes(@PathVariable String ids) {
+        return this.episodeClient.getEpisodesById(ids);
+    }
 }
