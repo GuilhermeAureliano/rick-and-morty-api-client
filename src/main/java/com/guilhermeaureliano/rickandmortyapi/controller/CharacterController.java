@@ -25,4 +25,10 @@ public class CharacterController {
         return this.rickAndMortyClient.getAllCharacters(page);
     }
 
+    @RequestMapping(value = "/characters/{ids}", method = RequestMethod.GET)
+    public Flux<CharacterResponse> getCharactersByIds(@PathVariable String ids) {
+        String[] idArray = ids.split(",");
+        return this.rickAndMortyClient.getCharactersByIds(idArray);
+    }
+
 }

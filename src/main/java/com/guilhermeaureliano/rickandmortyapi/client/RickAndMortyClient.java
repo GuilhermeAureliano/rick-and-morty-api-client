@@ -48,4 +48,19 @@ public class RickAndMortyClient {
                         error -> Mono.error(new RuntimeException("Erro ao buscar personagens!")))
                 .bodyToFlux(CharacterListResponse.class);
     }
+
+    public Flux<CharacterResponse> getCharactersByIds(String[] ids) {
+        log.info("Buscando os personagens pelos IDs [{}]", ids);
+
+        String idsAsString = String.join(",", ids);
+        return webClient
+                .get()
+                .uri("/character/" + idsAsString)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        error -> Mono.error(new RuntimeException("Verifique o ID informado!")))
+                .bodyToFlux(CharacterResponse.class);
+    }
+
 }
