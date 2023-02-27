@@ -1,6 +1,6 @@
 package com.guilhermeaureliano.rickandmortyapi.controller;
 
-import com.guilhermeaureliano.rickandmortyapi.client.RickAndMortyClient;
+import com.guilhermeaureliano.rickandmortyapi.client.CharacterClient;
 import com.guilhermeaureliano.rickandmortyapi.response.CharacterListResponse;
 import com.guilhermeaureliano.rickandmortyapi.response.CharacterResponse;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/webclient")
 public class CharacterController {
 
-    private RickAndMortyClient rickAndMortyClient;
+    private CharacterClient rickAndMortyClient;
 
     @RequestMapping(value = "/character/{id}", method = RequestMethod.GET)
     public Mono<CharacterResponse> getCharacterById(@PathVariable String id) {

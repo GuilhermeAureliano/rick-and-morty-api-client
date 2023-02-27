@@ -12,11 +12,11 @@ import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
-public class RickAndMortyClient {
+public class CharacterClient {
 
     private final WebClient webClient;
 
-    public RickAndMortyClient(WebClient.Builder builder) {
+    public CharacterClient(WebClient.Builder builder) {
         this.webClient = builder.baseUrl("https://rickandmortyapi.com/api").build();
     }
 
